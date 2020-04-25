@@ -73,7 +73,6 @@ public class IndexController {
 
     @GetMapping("/")
     public String getIndex(Model model) {
-        //TODO improve the default field handling
         return "index";
     }
 
@@ -105,6 +104,7 @@ public class IndexController {
                 if (!nextHarvestString.isEmpty()) {
                     nextHarvest = LocalTime.from(dateTimeFormatter.parse(nextHarvestString));
                 }
+                boolean selfRegenFullyGrown = fieldJsonObj.getBoolean("selfRegenFullyGrown");
                 Optional<Crop> optionalCrop = cropRepository.findById(cropId);
                 if (optionalCrop.isPresent()) {
                     Crop crop = optionalCrop.get();
@@ -112,6 +112,11 @@ public class IndexController {
                     field.setFieldName(fieldName);
                     field.setPlantTime(plantTime);
                     field.setNextHarvest(nextHarvest);
+                    if (selfRegenFullyGrown) {
+                        field.setGrowthTime(crop.getGrowthTime().dividedBy(2));
+                    } else {
+                        field.setGrowthTime(crop.getGrowthTime());
+                    }
                     fields.add(field);
                 }
             }
@@ -178,6 +183,7 @@ public class IndexController {
 
                     resultField.setNextHarvest(nextHarvest.plus(newGrowthTime));
                     resultField.setGrowthTime(newGrowthTime);
+                    resultField.setSelfRegenFullyGrown(true);
 
                     resultField.setPlantTime(nextHarvest);
                 } else {

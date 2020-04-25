@@ -33,6 +33,7 @@ public class FieldSerializer extends StdSerializer<Field> {
             jsonGenerator.writeStringField("nextHarvest", "");
         }
         jsonGenerator.writeStringField("growthTime", dateTimeFormatter.format(LocalTime.MIDNIGHT.plus(field.getGrowthTime())));
+        jsonGenerator.writeBooleanField("selfRegenFullyGrown", field.isSelfRegenFullyGrown());
         jsonGenerator.writeEndObject();
     }
 }

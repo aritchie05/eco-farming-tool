@@ -166,3 +166,7 @@ h2 {
 .main-bottom-margin {
     margin-bottom: 56px;
 }
+
+.hidden {
+    display: none;
+}

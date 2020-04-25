@@ -22,6 +22,7 @@ function plantField(fieldId) {
             let nextHarvestSpan = $('#field' + fieldId + '-nextHarvest');
             nextHarvestSpan.text(responseJson.nextHarvest);
             document.getElementById('field' + fieldId + '-plantButton').innerHTML = 'Replant';
+            document.getElementById('field' + fieldId + '-selfRegenFullyGrown').innerHTML = 'false';
 
             saveAllFieldsToCookie();
         }
@@ -58,6 +59,13 @@ function harvestField(fieldId) {
             }
             let nextHarvestSpan = $('#field' + fieldId + '-nextHarvest');
             nextHarvestSpan.text(fieldResult.nextHarvest);
+
+            if (fieldResult.selfRegenFullyGrown) {
+                $('#field' + fieldId + '-selfRegenFullyGrown').html('true');
+            }
+
+            let growthDuration = $('#field' + fieldId + '-growthDuration');
+            growthDuration.html(formatDuration(fieldResult.growthTime));
 
             saveAllFieldsToCookie();
         });
@@ -121,13 +129,15 @@ function getField(fieldId) {
     let cropSelect = document.getElementById('field' + fieldId + '-cropSelect');
     let plantTime = document.getElementById('field' + fieldId + '-plantTime').innerHTML;
     let nextHarvest = document.getElementById('field' + fieldId + '-nextHarvest').innerHTML;
+    let selfRegenFullyGrown = document.getElementById('field' + fieldId + '-selfRegenFullyGrown').innerHTML;
 
     return {
         id: fieldId,
         fieldName: fieldName,
         plantedCropId: cropSelect.options[cropSelect.selectedIndex].value,
         plantTime: plantTime,
-        nextHarvest: nextHarvest
+        nextHarvest: nextHarvest,
+        selfRegenFullyGrown: selfRegenFullyGrown
     };
 }
 

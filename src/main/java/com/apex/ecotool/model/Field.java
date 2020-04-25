@@ -11,6 +11,7 @@ public class Field {
     private LocalTime plantTime;
     private LocalTime nextHarvest;
     private Duration growthTime;
+    private boolean selfRegenFullyGrown;
 
     public Field(int id, Crop plantedCrop) {
         this.id = id;
@@ -19,6 +20,7 @@ public class Field {
         this.plantTime = null;
         this.nextHarvest = null;
         this.growthTime = plantedCrop.getGrowthTime();
+        selfRegenFullyGrown = false;
     }
 
     public int getId() {
@@ -63,5 +65,13 @@ public class Field {
 
     public void setGrowthTime(Duration growthTime) {
         this.growthTime = growthTime;
+    }
+
+    public boolean isSelfRegenFullyGrown() {
+        return selfRegenFullyGrown;
+    }
+
+    public void setSelfRegenFullyGrown(boolean selfRegenFullyGrown) {
+        this.selfRegenFullyGrown = selfRegenFullyGrown;
     }
 }
