@@ -23,36 +23,38 @@
     <title>Eco Farming Tool</title>
 </head>
 <body>
-    <header th:fragment="header">
-        <!--TODO add header content-->
-    </header>
+<header th:fragment="header">
+    <!--TODO add header content-->
+</header>
 
-    <nav th:fragment="nav"
-         class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark-elevated-1 border-bottom-primary text-light">
-        <a class="navbar-brand" href="/">
-            <img th:src="@{/images/eco-logo-new.png}" height="30"
-                 class="d-inline-block align-top logo-margin" alt="Eco Logo">
-            Farming Tool
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Timers<span class="sr-only"></span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Reference</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+<nav th:fragment="nav"
+     class="navbar navbar-expand-lg navbar-dark fixed-top bg-dark-elevated-1 border-bottom-primary text-light">
+    <a class="navbar-brand" href="/">
+        <img th:src="@{/images/eco-logo-new.png}" height="30"
+             class="d-inline-block align-top logo-margin" alt="Eco Logo">
+        Farming Tool
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Timers<span class="sr-only"></span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Reference</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
-    <footer th:fragment="footer" class="footer fixed-bottom bg-dark-elevated-1 text-muted">
-        <p class="footer-text"><a href="#">View the source code</a> | <a href="#">Report a bug</a> |
-            <a href="https://github.com/SevenAngels">By 300</a> <span class="float-right margin-right">This site uses a cookie.</span></p>
-    </footer>
+<footer th:fragment="footer" class="footer fixed-bottom bg-dark-elevated-1 text-muted">
+    <p class="footer-text"><a href="https://github.com/SevenAngels/eco-farming-tool">View the source code</a> |
+        <a href="https://github.com/SevenAngels/eco-farming-tool/issues">Report a bug</a> |
+        <a href="https://github.com/SevenAngels">By 300</a>
+        <span class="float-right margin-right">This site uses a cookie.</span></p>
+</footer>
 </body>
 </html>
