@@ -1,0 +1,20 @@
+_id,name,biome,isSelfRegenerating,growthTime,_class
+agave,Agave,Desert,false,PT16H48M,com.apex.ecotool.model.Crop
+beans,Beans,Forest,false,PT19H12M,com.apex.ecotool.model.Crop
+beets,Beets,Grassland,false,PT19H12M,com.apex.ecotool.model.Crop
+bolete,Bolete Mushrooms,Rainforest,false,PT19H12M,com.apex.ecotool.model.Crop
+camas,Camas Bulbs,Grassland,false,PT19H12M,com.apex.ecotool.model.Crop
+cookeina,Cookeina Mushrooms,Rainforest,false,PT19H12M,com.apex.ecotool.model.Crop
+corn,Corn,Grassland,false,PT19H12M,com.apex.ecotool.model.Crop
+crimini,Crimini Mushrooms,Rainforest,false,PT16H48M,com.apex.ecotool.model.Crop
+fiddleheads,Fiddleheads,Forest,false,PT14H24M,com.apex.ecotool.model.Crop
+fireweed,Fireweed Shoots,Boreal Forest,false,PT14H24M,com.apex.ecotool.model.Crop
+huckleberries,Huckleberries,Forest,true,PT19H12M,com.apex.ecotool.model.Crop
+papayas,Papayas,Rainforest,true,PT14H24M,com.apex.ecotool.model.Crop
+pineapples,Pineapples,Rainforest,true,PT14H24M,com.apex.ecotool.model.Crop
+pears,Prickly Pears,Desert,true,PT16H48M,com.apex.ecotool.model.Crop
+pumpkins,Pumpkins,Grassland,false,PT16H48M,com.apex.ecotool.model.Crop
+rice,Rice,Grassland,false,PT19H12M,com.apex.ecotool.model.Crop
+taro,Taro Roots,Rainforest,false,PT14H24M,com.apex.ecotool.model.Crop
+tomatoes,Tomatoes,Grassland,true,PT19H12M,com.apex.ecotool.model.Crop
+wheat,Wheat,Grassland,false,PT16H48M,com.apex.ecotool.model.Crop

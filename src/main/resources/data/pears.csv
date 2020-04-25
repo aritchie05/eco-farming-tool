@@ -1,0 +1,2 @@
+_id,name,biome,isSelfRegenerating,growthTime,_class
+pears,Prickly Pears,Desert,true,PT16H48M,com.apex.ecotool.model.Crop

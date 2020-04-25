@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html class="bg-dark-base" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="fragments/template.html :: head">
+</head>
+<body class="text-light bg-dark-base">
+<div class="container-fluid">
+    <header th:replace="fragments/template.html :: header"></header>
+    <nav th:replace="fragments/template.html :: nav"></nav>
+    <div class="top-padding">
+        <main class="flex-shrink-0" role="main">
+            <div class="row bg-dark-elevated-1">
+                <div class="col">
+                    <h2>Field Name</h2>
+                </div>
+                <div class="col">
+                    <h2>Crop</h2>
+                </div>
+                <div class="col">
+                    <h2>Biome</h2>
+                </div>
+                <div class="col">
+                    <h2>Growth Duration</h2>
+                </div>
+                <div class="col">
+                    <h2>Plant Time</h2>
+                </div>
+                <div class="col">
+                    <h2>Next Harvest</h2>
+                </div>
+                <div class="col-md-auto pad-end-header">
+                </div>
+            </div>
+            <div id="fields-container">
+                <!--Will be populated by js-->
+            </div>
+            <div class="row row-padding bg-dark-elevated-2 main-bottom-margin">
+                <div class="col text-center">
+                    <span id="new-field-button" class="material-icons md-light md-48 md-inactive pseudo-button">add_circle</span>
+                </div>
+            </div>
+
+
+            <!--
+            <button class="btn btn-secondary dropdown-toggle" id="cropMenuButton" type="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose
+            </button>
+            <div class="dropdown-menu bg-dark-elevated-1 text-light" aria-labelledby="cropMenuButton">
+                <a class="dropdown-item" th:each="crop : ${crops}">
+                    <img th:src="@{'/images/crops/' + ${crop.id} + '.png'}"
+                         width="30" height="30" th:alt="${crop.id}">
+                    <span th:text="${crop.name}">Crop</span>
+                </a>
+            </div>
+            -->
+        </main>
+    </div>
+    <footer th:replace="fragments/template.html :: footer"></footer>
+</div>
+</body>
+</html>

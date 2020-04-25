@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<div th:id="${'field' + field.id}" class="row row-padding bg-dark-elevated-2 row-border-bottom field-row" th:each="field : ${fields}">
+    <div class="col d-flex active-cyan-input align-items-center">
+        <label class="sr-only" th:for="${'field' + field.id + '-fieldName'}">Field Name Input</label>
+        <input th:id="${'field' + field.id + '-fieldNameInput'}" class="input-dark-bg field-name-input active-cyan-input" type="text">
+    </div>
+    <div class="col d-flex align-items-center">
+        <label class="sr-only" th:for="${'field' + field.id + '-cropSelect'}">Choose Crop</label>
+        <select th:id="${'field' + field.id + '-cropSelect'}" class="custom-select bg-dark-elevated-3 text-light crop-select"
+                th:attr="onchange=${'updateFieldCrop(' + field.id + ')'}">
+            <option th:each="crop : ${crops}" th:value="${crop.id}" th:text="${crop.name}" th:selected="${field.plantedCrop.id == crop.id}"></option>
+        </select>
+    </div>
+    <div class="col d-flex align-items-center">
+        <span th:id="${'field' + field.id + '-biome'}" th:text="${field.plantedCrop.biome}"></span>
+    </div>
+    <div class="col d-flex align-items-center">
+                    <span th:id="${'field' + field.id + '-growthDuration'}" th:text="${field.plantedCrop.growthTime.toHoursPart()} + ' Hrs ' +
+                    ${field.plantedCrop.growthTime.toMinutesPart()} + ' Min'"></span>
+    </div>
+    <div class="col d-flex align-items-center">
+        <button th:id="${'field' + field.id + '-plantButton'}" type="button" class="btn btn-outline-success margin-right"
+                th:attr="onclick=${'plantField(' + field.id + ')'}">Plant</button>
+        <span th:id="${'field' + field.id + '-plantTime'}" th:text="${field.plantTime}"></span>
+    </div>
+    <div class="col d-flex align-items-center">
+        <button type="button" class="btn btn-outline-danger margin-right" th:attr="onclick=${'harvestField(' + field.id + ')'}">Harvest</button>
+        <span th:id="${'field' + field.id + '-nextHarvest'}" th:text="${field.nextHarvest}"></span>
+    </div>
+    <div class="col-md-auto d-flex align-items-center">
+        <span th:attr="onclick=${'deleteField(' + field.id + ')'}"
+              class="material-icons md-24 md-light md-inactive pseudo-button">close</span>
+    </div>
+</div>
+</html>
