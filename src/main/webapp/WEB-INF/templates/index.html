@@ -38,20 +38,6 @@
                     <span id="new-field-button" class="material-icons md-light md-48 md-inactive pseudo-button">add_circle</span>
                 </div>
             </div>
-
-
-            <!--
-            <button class="btn btn-secondary dropdown-toggle" id="cropMenuButton" type="button"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Choose
-            </button>
-            <div class="dropdown-menu bg-dark-elevated-1 text-light" aria-labelledby="cropMenuButton">
-                <a class="dropdown-item" th:each="crop : ${crops}">
-                    <img th:src="@{'/images/crops/' + ${crop.id} + '.png'}"
-                         width="30" height="30" th:alt="${crop.id}">
-                    <span th:text="${crop.name}">Crop</span>
-                </a>
-            </div>
-            -->
         </main>
     </div>
     <footer th:replace="fragments/template.html :: footer"></footer>
