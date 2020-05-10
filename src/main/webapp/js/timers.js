@@ -239,7 +239,7 @@ function populateFieldRowTemplate(field) {
     let fieldRowHtml = fieldRowHtmlTemplate;
     let baseFieldName = 'field' + field.id;
     fieldRowHtml = fieldRowHtml.replace('${field.rowId}', baseFieldName);
-    fieldRowHtml = fieldRowHtml.replace(/\${field.nameInputId}/g  , baseFieldName + '-fieldName');
+    fieldRowHtml = fieldRowHtml.replace(/\${field.nameInputId}/g, baseFieldName + '-fieldName');
     fieldRowHtml = fieldRowHtml.replace('${field.namePlaceholder}',
         field.plantedCropId.substring(0, 1).toUpperCase() + field.plantedCropId.substring(1) + ' Field');
     fieldRowHtml = fieldRowHtml.replace(/\${field.cropSelectId}/g, baseFieldName + '-cropSelect');
@@ -261,13 +261,10 @@ function populateFieldRowTemplate(field) {
 
     //Saving the fields to cookie wraps booleans in quotes, so we always have to treat it as a string
     if (field.selfRegenFullyGrown === 'true') {
-        let hoursDuration = parseFloat(plantedCrop.growthTime.substring(0, 2)) + (parseFloat(plantedCrop.growthTime.substring(3, 5)) / 60);
-        hoursDuration = hoursDuration / 2;
-        let plainHours = hoursDuration.toFixed();
-        let plainMinutes = ((hoursDuration - plainHours) * 60).toFixed();
-        fieldRowHtml = fieldRowHtml.replace('${field.growthDurationText}', plainHours + ' Hrs ' + plainMinutes + ' Min');
+        let growthDurationText = divideGrowthTime(plantedCrop.growthTime, 2);
+        fieldRowHtml = fieldRowHtml.replace('${field.growthDurationText}', formatDuration(growthDurationText));
     } else {
-        let growthDurationText = plantedCrop.growthTime.substring(0, 2) + ' Hrs ' + plantedCrop.growthTime.substring(3, 5) + ' Min';
+        let growthDurationText = formatDuration(plantedCrop.growthTime);
         fieldRowHtml = fieldRowHtml.replace('${field.growthDurationText}', growthDurationText);
     }
     fieldRowHtml = fieldRowHtml.replace('${field.plantButton}', baseFieldName + '-plantButton');
@@ -370,34 +367,14 @@ function harvestField(numId) {
 
         let growthTime = plantedCrop.growthTime;
         //Cut growth duration in half and set self regen fully grown to true if it is the first harvest
-        if (selfRegenFullyGrownSpan.text() !== 'true') {
-            console.log('In already fully grown logic');
-            selfRegenFullyGrownSpan.text('true');
+        console.log('In already fully grown logic');
+        selfRegenFullyGrownSpan.text('true');
 
-            let hoursDuration = parseFloat(growthTime.substring(0, 2)) + (parseFloat(growthTime.substring(3, 5)) / 60);
-            console.log('hoursDuration: ' + hoursDuration);
-            hoursDuration = hoursDuration / 2;
-            console.log('newHoursDuration: ' + hoursDuration);
-            let plainHours = Math.floor(hoursDuration);
-            console.log('plainHours: ' + plainHours);
-            let plainMinutes = Math.round((hoursDuration - plainHours) * 60);
-            console.log('plainMinutes: ' + plainMinutes);
-            let strHours = '';
-            let strMinutes = '';
-            if (plainHours < 10) {
-                strHours += '0';
-            }
-            strHours += plainHours;
-            if (plainMinutes < 10) {
-                strMinutes += '0';
-            }
-            strMinutes += plainMinutes;
-            growthTime = strHours + ':' + strMinutes;
-            growthDurationSpan.text(formatDuration(growthTime));
-        }
+        let newGrowthDuration = divideGrowthTime(growthTime, 2);
+        growthDurationSpan.text(formatDuration(newGrowthDuration));
 
         plantTimeSpan.text(field.nextHarvest);
-        nextHarvestSpan.text(calculateHarvestTime(field.nextHarvest, growthTime));
+        nextHarvestSpan.text(calculateHarvestTime(field.nextHarvest, newGrowthDuration));
 
     } else {
         plantTimeSpan.text('');
@@ -406,6 +383,29 @@ function harvestField(numId) {
     }
 
     saveAllFieldsToCookie();
+}
+
+function divideGrowthTime(growthTime, divisor) {
+    let hoursDuration = parseFloat(growthTime.substring(0, 2)) + (parseFloat(growthTime.substring(3, 5)) / 60);
+    console.log('hoursDuration: ' + hoursDuration);
+    hoursDuration = hoursDuration / divisor;
+    console.log('newHoursDuration: ' + hoursDuration);
+    let plainHours = Math.floor(hoursDuration);
+    console.log('plainHours: ' + plainHours);
+    let plainMinutes = Math.round((hoursDuration - plainHours) * 60);
+    console.log('plainMinutes: ' + plainMinutes);
+    let strHours = '';
+    let strMinutes = '';
+    if (plainHours < 10) {
+        strHours += '0';
+    }
+    strHours += plainHours;
+    if (plainMinutes < 10) {
+        strMinutes += '0';
+    }
+    strMinutes += plainMinutes;
+    growthTime = strHours + ':' + strMinutes;
+    return growthTime;
 }
 
 function calculateHarvestTime(plantTimeString, growthTimeString) {
@@ -452,8 +452,7 @@ function updateFieldCrop(numId) {
     saveAllFieldsToCookie();
 }
 
-function updateFieldNamePlaceholder(fieldId)
-{
+function updateFieldNamePlaceholder(fieldId) {
     console.log('Updating field name placeholder for ' + fieldId);
     let field = getField(fieldId);
     let newPlaceholder = field.plantedCropId.substring(0, 1).toUpperCase() + field.plantedCropId.substring(1) + ' Field';
