@@ -192,7 +192,7 @@ const crops = [
 
 const fieldRowHtmlTemplate =
     '<div id="${field.rowId}" class="row row-padding bg-dark-elevated-2 row-border-bottom field-row">\n' +
-    '    <div class="col d-flex active-cyan-input align-items-center">\n' +
+    '    <div class="col active-cyan-input align-items-center hide-on-small-viewport">\n' +
     '        <label class="sr-only" for="${field.nameInputId}">Field Name Input</label>\n' +
     '        <input id="${field.nameInputId}" placeholder="${field.namePlaceholder}"\n' +
     '               class="input-dark-bg field-name-input active-cyan-input" type="text">\n' +
@@ -205,10 +205,10 @@ const fieldRowHtmlTemplate =
     '        ${cropOptionsList}' +
     '        </select>\n' +
     '    </div>\n' +
-    '    <div class="col d-flex align-items-center">\n' +
+    '    <div class="col align-items-center hide-on-small-viewport">\n' +
     '        <span id="${field.biomeId}">${field.biome}</span>\n' +
     '    </div>\n' +
-    '    <div class="col d-flex align-items-center">\n' +
+    '    <div class="col align-items-center hide-on-small-viewport">\n' +
     '         <span id="${field.growthDurationSpan}">${field.growthDurationText}</span>\n' +
     '    </div>\n' +
     '    <div class="col d-flex align-items-center">\n' +
@@ -225,7 +225,7 @@ const fieldRowHtmlTemplate =
     '        <span id="${field.nextHarvestSpan}">${field.nextHarvestText}</span>\n' +
     '        <span id="${field.selfRegenFullyGrownSpan}" class="hidden">${field.selfRegenFullyGrownText}</span>\n' +
     '    </div>\n' +
-    '    <div class="col-md-auto d-flex align-items-center">\n' +
+    '    <div class="col-sm-auto d-flex align-items-center">\n' +
     '        <span onclick="deleteField(${field.id})"\n' +
     '              class="material-icons md-24 md-light md-inactive pseudo-button">close</span>\n' +
     '    </div>\n' +
@@ -494,6 +494,8 @@ function getCropById(cropId) {
     return undefined;
 }
 
+let isSmallViewport = false;
+
 $(document).ready(function () {
     let fields = Cookies.get('fields');
 
@@ -515,4 +517,21 @@ $(document).ready(function () {
     }
 
     document.getElementById('new-field-button').onclick = addField;
+
+    $('.hide-on-small-viewport').css('display', 'flex');
+
+    hideOrShowOptionalColumns();
+    isSmallViewport = Math.round($(window).width()) <= 1280;
+
+    $(window).resize(hideOrShowOptionalColumns);
 });
+
+function hideOrShowOptionalColumns() {
+    if (Math.round($(window).width()) <= 1280 && !isSmallViewport) {
+        $('.hide-on-small-viewport').css('display', 'none');
+        isSmallViewport = true;
+    } else if (Math.round($(window).width()) > 1280 && isSmallViewport) {
+        $('.hide-on-small-viewport').css('display', 'flex');
+        isSmallViewport = false;
+    }
+}
