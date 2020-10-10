@@ -1,14 +1,9 @@
 package com.apex.ecotool.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.time.Duration;
 
-@Document(collection = "crops")
 public class Crop {
 
-    @Id
     private final String id;
     private final String name;
     private final String biome;
