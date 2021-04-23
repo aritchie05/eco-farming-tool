@@ -105,6 +105,13 @@ const crops = [
         "growthTime": "19:12",
     },
     {
+        "id": "cotton",
+        "name": "Cotton",
+        "biome": "Wetlands",
+        "isSelfRegenerating": "true",
+        "growthTime": "19:12",
+    },
+    {
         "id": "crimini",
         "name": "Crimini Mushrooms",
         "biome": "Rainforest",
